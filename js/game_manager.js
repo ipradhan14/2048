@@ -1,8 +1,9 @@
-function GameManager(size, InputManager, Actuator, StorageManager) {
+function GameManager(size, InputManager, Actuator, StorageManager, Agent) {
   this.size           = size; // Size of the grid
   this.inputManager   = new InputManager;
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
+  this.agent          = new Agent;
 
   this.startTiles     = 2;
 
@@ -95,7 +96,9 @@ GameManager.prototype.actuate = function () {
     bestScore:  this.storageManager.getBestScore(),
     terminated: this.isGameTerminated()
   });
-
+  console.log('acutation complete');
+  var agentMove = this.agent.getMove();
+  this.move(agentMove);
 };
 
 // Represent the current game as an object
